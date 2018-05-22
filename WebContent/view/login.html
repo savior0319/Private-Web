@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../CSS/stylesheet.css" rel="stylesheet">
+    <title>Page</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1 id="title-index">로그인 / 회원가입</h1>
+        <br>
+        <hr id="line-1-hr-index">
+        <br>
+        <br>
+        <fieldset id="fset-login">
+            <legend>
+                <h3>로그인</h3>
+            </legend>
+            <form action="/web1/view/loginsuccess.jsp" method="post">
+                <table id="login-table">
+                    <tr>
+                        <td>아이디</td>
+                        <td>
+                            <input maxlength="16" type="text" name="userId" id="userId" required pattern="^[a-z0-9_]{4,16}$">
+                        </td>
+                        <td rowspan="2">
+                            <input type="submit" value="로그인" id="login-btn">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td>
+                            <input maxlength="16" type="password" name="userPwd" id="userPwd" required pattern="^[a-zA-Z0-9!@#$%^&*()-=_+]{4,16}$">
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" id="signUpBtn">회원가입</button>
+            </form>
+        </fieldset>
+    </div>
+</body>
+<script>
+    document.getElementById("signUpBtn").addEventListener('click', function () {
+        window.location.href = "signup.html"
+    });
+</script>
+
+</html>
