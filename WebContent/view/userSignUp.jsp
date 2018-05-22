@@ -1,3 +1,4 @@
+<%@page import="jsp.sendmail.MemberSendMail"%>
 <%@page import="jsp.member.service.MemberService"%>
 <%@page import="jsp.member.vo.MemberVo"%>
 <%@page import="jsp.encrypt.sha256.SHA256"%>
@@ -37,6 +38,8 @@
 			int result = new MemberService().memberSignUp(mv);
 
 			if (result > 0) {
+				new MemberSendMail().sendMail(mv.getUserMail(), mv.getUserId());
+				
 		%>
 		<script>
 			alert('회원 가입 완료');
