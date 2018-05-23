@@ -44,8 +44,8 @@ public class MemberSendMail {
 			message.setFrom(new InternetAddress("kh.message.smtp@gmail.com"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
 			message.setSubject("--회원 가입을 환영합니다 --");
-			message.setText(id + "님 회원가입을 해주셔서," + "\n\n 감사합니다!");
-			System.out.println("send!!!");
+			message.setText(id + "님 회원가입이 완료되었습니다.\n\n 감사합니다\n\n본 이메일은 발신 전용입니다. 자세히 알아보려면 고객센터를 방문하세요.\n");
+			System.out.println("sendstart");
 			Transport.send(message);
 			System.out.println("SEND");
 
