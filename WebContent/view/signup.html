@@ -12,6 +12,8 @@
 <title>회원가입</title>
 </head>
 
+<!-- CSS -->
+
 <style>
 fieldset {
 	width: 550px;
@@ -41,6 +43,10 @@ hr {
 	background: rgb(226, 226, 226);
 }
 </style>
+
+<!-- CSS END -->
+
+<!-- BODY -->
 
 <body>
 	<div class="wrapper">
@@ -191,23 +197,19 @@ hr {
 	</div>
 </body>
 
+<!-- BODY END -->
+
+
+<!-- JS JQUERY -->
+
 <script>
 
+	//뒤로가기 버튼
 	function back() {
 		history.back(-1);
 	}
 
-
 	$(document).ready(function() {
-		// 이메일 인증 팝업 & JSP로 전송
-
-		$('#mailAuthBtn').click(function() {
-			if (resultMail == true) {
-				var userEmail = document.getElementById("userEmail").value;
-				var mailAuthChk = document.getElementById("mailAuthChk").value;
-				var result = window.open("mailAuth.jsp?userEmail=" + userEmail + "&mailAuthChk=" + mailAuthChk, "_blank", "resizable=0, width=500, height=180");
-			}
-		});
 
 		// JQuery에 사용하기 위한 변수 설정
 		var $idMsg = $('#idMsg'),
@@ -227,20 +229,26 @@ hr {
 		$signUpBtn.click(function() {
 			if ($userPwd.val() != $userPwdRe.val()) {
 				event.preventDefault();
-			} 
-			
+			}
+
 			if (document.getElementById("mailAuthChk").getAttribute('value') == "none") {
+				alert('입력하지 않은 항목이 있습니다');
 				return false;
 			} else {
 				return true;
 			}
 		});
 
-		// 아이디 중복체크 팝업
+		// 아이디 중복체크 입력 필드 선택 시 팝업
 		$userId.click(function() {
 			window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180 ");
 			$idMsg.html('<br>아이디 중복체크를 해주세요').css('color', 'red').css(
 				'font-size', '13px').fadeIn(300);
+		});
+
+		// 아이디 중복체크 버튼 팝업 띄우기
+		document.getElementById("duplicateBtn").addEventListener('click', function() {
+			window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180");
 		});
 
 		// 아이디 입력 방지
@@ -325,9 +333,9 @@ hr {
 			});
 		});
 
+		resultMail = false;
 		// 메일 정규식
 		function chkMail() {
-			resultMail = false;
 			regExgMail = /^[a-zA-Z0-9_]{2,}@[a-zA-Z]{2,}.[a-z]{2,3}$/;
 			resultMail = regExgMail.test($userEmail.val());
 			if (resultMail == true) {
@@ -347,10 +355,19 @@ hr {
 			});
 		});
 
-		document.getElementById("duplicateBtn").addEventListener('click', function() {
-			window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180");
+		// 이메일 인증 팝업 & JSP로 전송
+		$('#mailAuthBtn').click(function() {
+			if (resultMail == true) {
+				var userEmail = document.getElementById("userEmail").value;
+				var result = window.open("mailAuth.jsp?userEmail=" + userEmail, "_blank",
+					"resizable=0, width=500, height=180");
+			} else {
+				alert('이메일을 입력해주세요');
+			}
 		});
 	});
 </script>
+
+<!-- JS JQUERY END -->
 
 </html>

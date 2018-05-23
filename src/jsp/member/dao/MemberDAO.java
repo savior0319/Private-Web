@@ -19,7 +19,8 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		try {
-			prop.load(new FileReader("C:\\Users\\savio\\Documents\\webworkspace\\web1\\src\\properties\\query.properties"));
+			prop.load(new FileReader(
+					"C:\\Users\\savio\\Documents\\webworkspace\\web1\\src\\properties\\query.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -90,6 +91,30 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result = 1;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int CheckEmail(Connection conn, String eMail) {
+		
+		int result = 0;
+		String query = prop.getProperty("CheckEmail");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, eMail);
 
 			rs = pstmt.executeQuery();
 

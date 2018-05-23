@@ -33,18 +33,19 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+
 	public int idCheck(String id) {
 		conn = JDBCTemplate.getConnect(conn);
 		int result = mDao.idCheck(conn, id);
-
-		if (result > 0) {
-			JDBCTemplate.close(conn);
-		} else
-			JDBCTemplate.rollBack(conn);
-
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+
+	public int CheckEmail(String eMail) {
+		conn = JDBCTemplate.getConnect(conn);
+		int result = mDao.CheckEmail(conn, eMail);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

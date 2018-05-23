@@ -1,3 +1,4 @@
+<%@page import="jsp.member.service.MemberService"%>
 <%@page import="jsp.sendmail.MemberSendMail"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -14,12 +15,27 @@
 </head>
 
 <%
+	int authNumber = 0;
 	String userEmail = request.getParameter("userEmail");
 
-	int authNumber = (int) (Math.random() * 90000) + 5000;
-	System.out.println("랜덤 생성된 인증번호 : " + authNumber);
+	/* 이메일 중복 여부 확인  */
 
-	new MemberSendMail().sendMail(userEmail, authNumber);
+	int result = new MemberService().CheckEmail(userEmail);
+
+	if (result == 1) {
+%>
+<script>
+	alert('이미 사용중인 이메일입니다');
+	close();
+</script>
+<%
+	} else {
+		/* 인증 번호  */
+		authNumber = (int) (Math.random() * 799999) + 200000;
+		/* System.out.println("랜덤 생성된 인증번호 : " + authNumber); */
+		/* 메일전송  */
+		new MemberSendMail().sendMail(userEmail, authNumber);
+	}
 %>
 
 <style>
