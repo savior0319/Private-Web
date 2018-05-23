@@ -19,9 +19,7 @@
 	String userEmail = request.getParameter("userEmail");
 
 	/* 이메일 중복 여부 확인  */
-
 	int result = new MemberService().CheckEmail(userEmail);
-
 	if (result == 1) {
 %>
 <script>
@@ -30,11 +28,16 @@
 </script>
 <%
 	} else {
-		/* 인증 번호  */
+		/* 인증 번호 생성 */
 		authNumber = (int) (Math.random() * 799999) + 200000;
-		/* System.out.println("랜덤 생성된 인증번호 : " + authNumber); */
+		/* 	System.out.println("랜덤 생성된 인증번호 : " + authNumber); */
 		/* 메일전송  */
 		new MemberSendMail().sendMail(userEmail, authNumber);
+%>
+<script>
+	alert('<%=userEmail%>' + ' 로 인증번호가 발송되었습니다');
+</script>
+<%
 	}
 %>
 
@@ -48,9 +51,9 @@
 
 <body>
 	<div class="wrapper">
-		<h3>인증코드 입력</h3>
+		<h3>인증번호입력</h3>
 		<hr>
-		<input type="text" placeholder="인증코드 입력" maxlength="6"
+		<input type="text" placeholder="인증번호 입력" maxlength="6"
 			id="inputNumber"> <br> <br>
 		<button id="insertBtn">입력</button>
 	</div>
@@ -60,11 +63,17 @@
  $('#insertBtn').click(function(){
 	 if($('#inputNumber').val() == <%=authNumber%>){
 		 alert('인증되었습니다');
-		 opener.document.getElementById("mailAuthChk").setAttribute('value', 'yes');
-		 opener.document.getElementById("userEmail").setAttribute('readonly', 'readonly');
+		/* 이메일 인증 완료시 인증 받은 이메일 사용하게 설정*/
+		 opener.document.getElementById("userEmail").value = '<%=userEmail%>';  
+		 /* 이메일 인증 여부 확인 */
+		 opener.document.getElementById("mailAuthChk").setAttribute('value', 'yes'); 
+		 /* 이메일 인증 완료시 변경 불가능 */
+		 opener.document.getElementById("userEmail").setAttribute('readonly', 'readonly'); 
+		 /* 이메일 인증 완료시 버튼 비활성화 */
+		 opener.document.getElementById("mailAuthBtn").setAttribute('disabled', true);
 		 close();
 	 } else {
-		 alert('인증번호를 잘못입력했습니다');
+		 alert('인증번호를 잘못 입력했습니다');
 	 }
  });
 </script>

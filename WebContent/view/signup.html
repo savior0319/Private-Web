@@ -250,20 +250,24 @@
 
 		// 아이디 중복체크 입력 필드 선택 시 팝업
 		$userId.click(function () {
-			window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180 ");
+			idPopUpOpen();
 			$idMsg.html('<br>아이디 중복체크를 해주세요').css('color', 'red').css(
 				'font-size', '13px').fadeIn(300);
 		});
 
 		// 아이디 중복체크 버튼 팝업 띄우기
 		document.getElementById("duplicateBtn").addEventListener('click', function () {
+			idPopUpOpen();
+		});
+
+		function idPopUpOpen() {
 			var windowW = 300; // 창의 가로 길이
 			var windowH = 180; // 창의 세로 길이
 			var left = Math.ceil((window.screen.width - windowW) / 2);
 			var top = Math.ceil((window.screen.height - windowH) / 2) - 75;
 			window.open("idDuplicate.jsp", "_blank", "top=" + top + ", left=" + left + ", height=" + windowH + ", width=" +
 				windowW);
-		});
+		}
 
 		// 아이디 입력 방지
 		$userId.keydown(function () {
