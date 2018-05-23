@@ -38,7 +38,7 @@
 			int result = new MemberService().memberSignUp(mv);
 
 			if (result > 0) {
-				new MemberSendMail().sendMail(mv.getUserMail(), mv.getUserId());
+				/*new MemberSendMail().sendMail(mv.getUserMail(), mv.getUserId());*/
 				
 		%>
 		<script>

@@ -15,7 +15,6 @@
 
 <%
 	String userEmail = request.getParameter("userEmail");
-	System.out.println(userEmail);
 
 	int authNumber = (int) (Math.random() * 90000) + 5000;
 	System.out.println("랜덤 생성된 인증번호 : " + authNumber);
@@ -35,15 +34,18 @@
 	<div class="wrapper">
 		<h3>인증코드 입력</h3>
 		<hr>
-			<input type="text" placeholder="인증코드 입력" maxlength="6" id="inputNumber"> <br>
-			<br> <button id="insertBtn"> 입력 </button>
+		<input type="text" placeholder="인증코드 입력" maxlength="6"
+			id="inputNumber"> <br> <br>
+		<button id="insertBtn">입력</button>
 	</div>
 </body>
 
 <script>
  $('#insertBtn').click(function(){
-	 if($('#inputNumber').val() == <%= authNumber %>){
+	 if($('#inputNumber').val() == <%=authNumber%>){
 		 alert('인증되었습니다');
+		 opener.document.getElementById("mailAuthChk").setAttribute('value', 'yes');
+		 opener.document.getElementById("userEmail").setAttribute('readonly', 'readonly');
 		 close();
 	 } else {
 		 alert('인증번호를 잘못입력했습니다');

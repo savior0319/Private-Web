@@ -19,8 +19,7 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		try {
-			prop.load(new FileReader(
-					"C:\\Users\\user1\\Documents\\webworkspace\\web2\\src\\properties\\query.properties"));
+			prop.load(new FileReader("C:\\Users\\savio\\Documents\\webworkspace\\web1\\src\\properties\\query.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

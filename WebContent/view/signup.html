@@ -227,8 +227,12 @@ hr {
 		$signUpBtn.click(function() {
 			if ($userPwd.val() != $userPwdRe.val()) {
 				event.preventDefault();
-			} else if (document.getElementById("mailAuthChk").value == "none") {
-				event.preventDefault();
+			} 
+			
+			if (document.getElementById("mailAuthChk").getAttribute('value') == "none") {
+				return false;
+			} else {
+				return true;
 			}
 		});
 
