@@ -152,17 +152,17 @@
                 <pre>
 약관에 동의 합니다 <input type="checkbox" name="termsAgreement" id="termsAgreement" required>
       
-        아이디         <input type="text" name="userId" id="userId" required pattern="^[a-zA-Z0-9_]{4,16}$">    
+                 아이디          <input type="text" name="userId" id="userId" size="16" required pattern="^[a-zA-Z0-9_]{4,16}$" placeholder="아이디" > <button type="button" id="duplicateBtn">중복체크</button>
 <div id="idMsg"></div>
-     비밀번호        <input type="password" name="userPwd" id="userPwd" required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{4,16}$">   
+         비밀번호         <input type="password" name="userPwd" id="userPwd" required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{4,16}$" placeholder="비밀번호">   
 <div id="pwdMsg"></div>
- 비밀번호 확인    <input type="password" name="userPwdRe" id="userPwdRe" required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{4,16}$">  
+     비밀번호 확인     <input type="password" name="userPwdRe" id="userPwdRe" required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{4,16}$" placeholder="비밀번호 확인">  
 <div id="pwdReMsg"></div>
-        이름          <input type="text" name="userName" id="userName" required pattern="^[가-힣]{2,10}$">  
+          이름            <input type="text" name="userName" id="userName" required pattern="^[가-힣]{2,10}$" placeholder="이름">  
 <div id="nameMsg"></div>
-성별             <input type="radio" name="userGender" id="userGenderM" value="남" required> 남     <input type="radio" name="userGender" id="userGenderF" value="여" required> 여
+ 성별                   <input type="radio" name="userGender" id="userGenderM" value="남" required> 남      <input type="radio" name="userGender" id="userGenderF" value="여" required> 여
 
-지역              <select name="userLocation" id="userLocation" required>
+지역                     <select name="userLocation" id="userLocation" required>
     <option value="">==선택==</option>
     <option value="서울">서울</option>
     <option value="인천">인천</option>
@@ -177,7 +177,7 @@
     <option value="제주도">제주도</option>
 </select>
 
-    이메일        <input type="text" name="userEmail" id="userEmail" required pattern="^[a-zA-Z0-9_]{2,}@[a-zA-Z]{2,}.[a-z]{2,3}$">
+      이메일           <input type="text" name="userEmail" id="userEmail" required pattern="^[a-zA-Z0-9_]{2,}@[a-zA-Z]{2,}.[a-z]{2,3}$" placeholder="이메일">
 <div id="mailMsg"></div>
 </pre>
                 <input type="submit" value="회원가입" id="signUpBtn">
@@ -217,26 +217,23 @@
             }
         });
 
-        // 아이디 정규식
-        function chkId() {
-            resultId = false;
-            regExgId = /^[a-zA-Z0-9_]{4,16}$/;
-            resultId = regExgId.test($userId.val());
-            if (resultId == true) {
-                $idMsg.hide();
-            } else {
-                $idMsg.html('<br>소문자, 숫자, _ 를 포함한 4글자 이상').css('color', 'red').css(
-                    'font-size',
-                    '13px').fadeIn(300);
-            }
-        }
+        // 아이디 중복체크 팝업
+        $userId.click(function () {
+            window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180 ");
+            $idMsg.html('<br>아이디 중복체크를 해주세요').css('color', 'red').css(
+                'font-size', '13px').fadeIn(300);
+        });
 
-        // 아이디 포커스 키업 메세지
+        // 아이디 입력 방지
+        $userId.keydown(function () {
+            event.preventDefault();
+        });
+
+        // 중복체크 확인
         $userId.focus(function () {
-            chkId();
-            $userId.keyup(function () {
-                chkId();
-            });
+            if ($userId.val() != "") {
+                $idMsg.hide();
+            }
         });
 
         // 비밀번호 정규식
@@ -331,6 +328,9 @@
             });
         });
 
+        document.getElementById("duplicateBtn").addEventListener('click', function () {
+            window.open("idDuplicate.jsp", "_blank", "resizable=0, width=300, height=180");
+        });
     });
 </script>
 

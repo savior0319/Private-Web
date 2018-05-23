@@ -19,7 +19,8 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		try {
-			prop.load(new FileReader("C:\\Users\\user1\\Documents\\webworkspace\\web2\\src\\properties\\query.properties"));
+			prop.load(new FileReader(
+					"C:\\Users\\user1\\Documents\\webworkspace\\web2\\src\\properties\\query.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,9 +59,9 @@ public class MemberDAO {
 	}
 
 	public int memberSignUp(Connection conn, MemberVo mv) {
-		
+
 		int result = 0;
-		
+
 		String query = prop.getProperty("memberSignUp");
 
 		try {
@@ -74,10 +75,33 @@ public class MemberDAO {
 
 			result = pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int idCheck(Connection conn, String id) {
+
+		int result = 0;
+		String query = prop.getProperty("idCheck");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result = 1;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
 		return result;

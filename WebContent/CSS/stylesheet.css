@@ -90,7 +90,7 @@ legend{
     transition-duration: 500ms;
 }
 
-#signUpBtn, #resetBtn, #backBtn {
+#signUpBtn, #resetBtn, #backBtn, #duplicateBtn, #useThisId, #duplicateBtn {
     border-radius: 10px;
     margin-top: 5px;
     height: 30px;
