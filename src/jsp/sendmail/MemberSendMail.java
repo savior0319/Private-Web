@@ -12,7 +12,7 @@ public class MemberSendMail {
 
 	private Properties prop = new Properties();
 
-	public void sendMail(String mail, String id) {
+	public void sendMail(String mail, int authNumber) {
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,8 +43,8 @@ public class MemberSendMail {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("kh.message.smtp@gmail.com"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
-			message.setSubject("--회원 가입을 환영합니다 --");
-			message.setText(id + "님 회원가입이 완료되었습니다.\n\n 감사합니다\n\n본 이메일은 발신 전용입니다. 자세히 알아보려면 고객센터를 방문하세요.\n");
+			message.setSubject("-- 인증번호 입니다 --");
+			message.setText("인증번호 : [" + authNumber + "]");
 			System.out.println("sendstart");
 			Transport.send(message);
 			System.out.println("SEND");

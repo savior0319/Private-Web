@@ -90,17 +90,30 @@ legend{
     transition-duration: 500ms;
 }
 
-#signUpBtn, #resetBtn, #backBtn, #duplicateBtn, #useThisId, #duplicateBtn {
+#signUpBtn, #resetBtn, #backBtn, #duplicateBtn, #useThisId, #duplicateBtn, #mailAuthBtn {
     border-radius: 10px;
     margin-top: 5px;
     height: 30px;
     width: 80px;
     border: none;
-    background: rgb(8, 231, 82);
+    background: rgb(75, 255, 135);
     cursor: pointer;
     font-size: 15px;
     border: 2px solid white;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
+}
+
+#signUpBtn:hover, #resetBtn:hover, #backBtn:hover, #duplicateBtn:hover, #useThisId:hover, #duplicateBtn:hover, #mailAuthBtn:hover {
+    border-radius: 10px;
+    margin-top: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    background: rgb(219, 253, 231);
+    cursor: pointer;
+    font-size: 15px;
+    border: 2px solid white;
+    transition-duration: 300ms;
 }
 
 
